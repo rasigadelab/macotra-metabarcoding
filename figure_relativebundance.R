@@ -63,11 +63,11 @@ T2_data_to_use <- data.frame(Species=data_carrier$Species, Means=rowMeans(T2_dat
 T3_data_to_use <- data.frame(Species=data_carrier$Species, Means=rowMeans(T3_data))
 T4_data_to_use <- data.frame(Species=data_carrier$Species, Means=rowMeans(T4_data))
 
-T0_data_to_use$time <- "0"
-T1_data_to_use$time <- "7"
-T2_data_to_use$time <- "35"
-T3_data_to_use$time <- "91"
-T4_data_to_use$time <- "175"
+T0_data_to_use$time <- "J0"
+T1_data_to_use$time <- "J7"
+T2_data_to_use$time <- "M1"
+T3_data_to_use$time <- "M3"
+T4_data_to_use$time <- "M6"
 
 df_graph <- rbind(T0_data_to_use, T1_data_to_use, T2_data_to_use, T3_data_to_use, T4_data_to_use)
 
@@ -75,17 +75,16 @@ df_graph$Species <- factor(df_graph$Species, levels = c("Staphylococcus_aureus",
 )
 
 p1 <- ggplot(data=df_graph, aes(x=time, y=Means, fill=Species)) +
-  geom_bar(stat="identity", position="fill",) +
-  scale_fill_manual(values=mycolors) + theme_minimal() + ylab("Proportions") + xlab("Days after decolonization") + 
-  ggtitle("Bacterial abundance in carriers") + scale_x_discrete(limits=c("0", "7", "35", "91", "175")) +
-  theme(axis.text.x = element_text(size = 15),
-      axis.text.y = element_text(size = 15),
-      axis.title.x = element_text(size = 15),
-      axis.title.y = element_text(size = 15),
-      plot.title = element_text(hjust = 0.5, face= "bold"))
-p1 <- p1 + geom_vline(xintercept = 1.5, color="red",linetype = 2, size = 0.5) + theme(legend.position = "none")
+  geom_bar(stat="identity", position="fill") +
+  scale_fill_manual(values=mycolors) + theme_minimal() + ylab("Proportions") + xlab("Sampling time") +
+  scale_x_discrete(limits=c("J0", "J7", "M1", "M3", "M6")) +
+  theme(axis.text.y = element_text(size = 15),
+        axis.text.x = element_text(size = 13),
+        axis.title = element_text(size = 18),
+        legend.position = "none")
+p1 <- p1 + geom_vline(xintercept = 1.5, color="red",linetype = 2, size = 0.7) 
+#p1 <- p1 + theme(axis.title = element_text(size= 20 ))
 p1
-
 
 
 
@@ -108,11 +107,11 @@ T2_data_to_use <- data.frame(Species=data_Ncarrier$Species, Means=rowMeans(T2_da
 T3_data_to_use <- data.frame(Species=data_Ncarrier$Species, Means=rowMeans(T3_data))
 T4_data_to_use <- data.frame(Species=data_Ncarrier$Species, Means=rowMeans(T4_data))
 
-T0_data_to_use$time <- "0"
-T1_data_to_use$time <- "7"
-T2_data_to_use$time <- "35"
-T3_data_to_use$time <- "91"
-T4_data_to_use$time <- "175"
+T0_data_to_use$time <- "J0"
+T1_data_to_use$time <- "J7"
+T2_data_to_use$time <- "M1"
+T3_data_to_use$time <- "M3"
+T4_data_to_use$time <- "M6"
 
 df_graph <- rbind(T0_data_to_use, T1_data_to_use, T2_data_to_use, T3_data_to_use, T4_data_to_use)
 
@@ -120,16 +119,16 @@ df_graph <- rbind(T0_data_to_use, T1_data_to_use, T2_data_to_use, T3_data_to_use
 #df_graph$Species <- factor(df_graph$Species, levels = c("Staphylococcus_aureus", "Dolosigranulum_pigrum", "Moraxella_nonliquefaciens", "Corynebacterium_propinquum", "Corynebacterium_accolens", "Corynebacterium_pseudodiphtheriticum", "Corynebacterium_macginleyi", "Staphylococcus_epidermidis", "Cutibacterium_acnes", "Others"))
 selected_names <- c("Staphylococcus_aureus", "Dolosigranulum_pigrum", "Moraxella_nonliquefaciens", "Corynebacterium_propinquum", "Corynebacterium_accolens", "Corynebacterium_pseudodiphtheriticum", "Corynebacterium_macginleyi", "Staphylococcus_epidermidis", "Cutibacterium_acnes", "Others")
 df_graph$Species <- factor(df_graph$Species, levels = selected_names)
-clean_names <- c("Staphylococcus aureus", "Dolosigranulum pigrum", "Moraxella nonliquefaciens", "Corynebacterium propinquum", "Corynebacterium accolens", "Corynebacterium pseudodiphtheriticum", "Corynebacterium macginleyi", "Staphylococcus epidermidis", "Cutibacterium acnes", "Others")
-df_graph$Species <- df_graph$Species %>% str_replace_all(c("Staphylococcus_aureus" = "Staphylococcus aureus", 
-                                                           "Dolosigranulum_pigrum" = "Dolosigranulum pigrum", 
-                                                           "Moraxella_nonliquefaciens" = "Moraxella nonliquefaciens",
-                                                           "Corynebacterium_propinquum" = "Corynebacterium propinquum", 
-                                                           "Corynebacterium_accolens" = "Corynebacterium accolens", 
-                                                           "Corynebacterium_pseudodiphtheriticum" = "Corynebacterium pseudodiphtheriticum", 
-                                                           "Corynebacterium_macginleyi" = "Corynebacterium macginleyi", 
-                                                           "Staphylococcus_epidermidis" = "Staphylococcus epidermidis", 
-                                                           "Cutibacterium_acnes" = "Cutibacterium acnes"))
+clean_names <- c("S. aureus", "D. pigrum", "M. nonliquefaciens", "C. propinquum", "C. accolens", "C. pseudodiphtheriticum", "C. macginleyi", "S. epidermidis", "C. acnes", "Others")
+df_graph$Species <- df_graph$Species %>% str_replace_all(c("Staphylococcus_aureus" = "S. aureus", 
+                                                           "Dolosigranulum_pigrum" = "D. pigrum", 
+                                                           "Moraxella_nonliquefaciens" = "M. nonliquefaciens",
+                                                           "Corynebacterium_propinquum" = "C. propinquum", 
+                                                           "Corynebacterium_accolens" = "C. accolens", 
+                                                           "Corynebacterium_pseudodiphtheriticum" = "C. pseudodiphtheriticum", 
+                                                           "Corynebacterium_macginleyi" = "C. macginleyi", 
+                                                           "Staphylococcus_epidermidis" = "S. epidermidis", 
+                                                           "Cutibacterium_acnes" = "C. acnes"))
 df_graph$Species <- factor(df_graph$Species, levels = clean_names)
 
 # p2 <- ggplot(data=df_graph, aes(x=time, y=Means, fill=Species)) +
@@ -155,21 +154,22 @@ FUNitalize<-function(x) {
 
 p2 <- ggplot(data=df_graph) +
   geom_bar(aes(x=time, y=Means, fill=Species), stat="identity", position="fill") +
-  scale_fill_manual(values=mycolors, breaks=levels(df_graph$Species), labels = FUNitalize(levels(df_graph$Species))) + theme_minimal() + ylab("Proportions") + xlab("Days after decolonization") + 
-  ggtitle("Bacterial abundance in non-carriers") + scale_x_discrete(limits=c("0", "7", "35", "91", "175")) + 
-  theme(legend.text = element_text(size=18), 
+  scale_fill_manual(values=mycolors, breaks=levels(df_graph$Species), labels = FUNitalize(levels(df_graph$Species))) + theme_minimal() + ylab("Proportions") + xlab("Sampling time") + 
+  scale_x_discrete(limits=c("J0", "J7", "M1", "M3", "M6")) + 
+  theme(legend.text = element_text(size=17), 
         legend.text.align = 0,
-        legend.title = element_text(size=18),
-        axis.text.x = element_text(size = 15),
+        legend.title = element_text(size=20),
         axis.text.y = element_text(size = 15),
-        axis.title.x = element_text(size = 15),
-        axis.title.y = element_text(size = 15),
-        plot.title = element_text(hjust = 0.5, face= "bold")) 
-p2 <- p2 + geom_vline(xintercept = 1.5, color="red",linetype = 2, size = 0.5)
+        axis.text.x = element_text(size = 13),
+        axis.title = element_text(size = 18))
 
+p2 <- p2 + geom_vline(xintercept = 1.5, color="red",linetype = 2, size = 0.7)
+p2
+
+
+grid.arrange(p1,p2, widths = c(4,10) )
 
 svg("../outputs/figure_bacterial_abund.svg", width=1200, height=796)
-grid.arrange(p1,p2, widths = c(3,7) )
 # Note : Zoom -> save image
 dev.off()
 
