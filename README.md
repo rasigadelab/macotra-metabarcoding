@@ -1,3 +1,3 @@
 # macotra-metabarcoding
 
-Accompanying code for Barray A, Baede V, et al. 2022
+Accompanying code for Baede V, Barray A, et al. 2022
